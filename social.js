@@ -17,24 +17,39 @@ class SocialNetwork {
   }
 
   getUser(userID) {
-      return this.users[userID] || null 
+    return this.users[userID] || null;
   }
 
   follow(userID1, userID2) {
-    
-    if(userID1 in this.users && userID2 in this.users) {
-      this.follows[userID1].add(userID2)
-      return true
+    if (userID1 in this.users && userID2 in this.users) {
+      this.follows[userID1].add(userID2);
+      return true;
     }
-    return false
+    return false;
   }
 
   getFollows(userID) {
-    // Your code here
+    // let followers = []
+    // if (userID in this.users) {
+    //   this.follows[userID].forEach(id => followers.push(id))
+    // }
+    // return followers;
+    return this.follows[userID];
   }
 
   getFollowers(userID) {
-    // Your code here
+    let followers = new Set();
+
+    for (const key in this.follows) {
+      if (this.follows[key].has(userID)) {
+        followers.add(Number(key));
+      }
+    }
+    return followers;
+
+    //1: {2, 3}
+    //2: {1, 3}
+    //3: {1, 2}
   }
 
   getRecommendedFollows(userID, degrees) {
