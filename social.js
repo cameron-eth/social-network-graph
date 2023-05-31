@@ -1,6 +1,5 @@
 // Implement the SocialNetwork class here
 class SocialNetwork {
-
   constructor() {
     this.users = {};
     this.follows = {};
@@ -8,7 +7,13 @@ class SocialNetwork {
   }
 
   addUser(name) {
-    // Your code here
+    this.currentID++;
+    const user = {};
+    user["id"] = this.currentID;
+    user["name"] = name;
+    this.follows[this.currentID] = new Set();
+    this.users[this.currentID] = user;
+    return this.currentID;
   }
 
   getUser(userID) {
